@@ -35,11 +35,11 @@ EcoTrack is a modern, professional, hackathon-ready full-stack web application d
 ### Backend Setup
 
 1. Open your terminal in the root directory.
-2. Create and configure your `.env` file:
+2. Create and configure your own local `.env` file (which is ignored by Git to keep configuration private) from the provided template:
    ```bash
    cp .env.example .env
    ```
-3. Open `.env` and verify settings:
+3. Open `.env` and verify your local settings (e.g. server port and JWT secret):
    ```env
    PORT=3000
    JWT_SECRET=your_super_secret_jwt_key_here
