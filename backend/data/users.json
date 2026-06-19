@@ -29,5 +29,14 @@
         "completedChallenges": [
             "c1"
         ]
+    },
+    {
+        "id": "8e6c5608-ac7d-4886-92ea-8d1ea8bfb4a6",
+        "name": "koushik",
+        "email": "koushik@gmail.com",
+        "password": "Kkoushik",
+        "score": 0,
+        "footprintHistory": [],
+        "completedChallenges": []
     }
 ]
