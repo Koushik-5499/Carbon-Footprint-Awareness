@@ -1,0 +1,44 @@
+[
+    {
+        "id": "c1",
+        "title": "Use Public Transport",
+        "description": "Take a bus or train instead of driving today.",
+        "points": 50,
+        "type": "daily"
+    },
+    {
+        "id": "c2",
+        "title": "Reduce Electricity",
+        "description": "Keep non-essential lights and appliances off for at least 4 hours.",
+        "points": 30,
+        "type": "daily"
+    },
+    {
+        "id": "c3",
+        "title": "Save Water",
+        "description": "Take a shower under 5 minutes.",
+        "points": 20,
+        "type": "daily"
+    },
+    {
+        "id": "c4",
+        "title": "Plastic-Free Week",
+        "description": "Avoid all single-use plastics for an entire week.",
+        "points": 200,
+        "type": "weekly"
+    },
+    {
+        "id": "c5",
+        "title": "Plant-Based Day",
+        "description": "Eat only vegetarian or vegan meals for a day.",
+        "points": 40,
+        "type": "daily"
+    },
+    {
+        "id": "e672b9a6-7d84-469d-a352-7cb567097f20",
+        "title": "Compost Waste",
+        "description": "Compost kitchen and garden waste to reduce landfill emissions.",
+        "points": 40,
+        "type": "daily"
+    }
+]

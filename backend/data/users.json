@@ -1,0 +1,33 @@
+[
+    {
+        "id": "b2e9bb04-bc4f-45eb-a04f-1537cffd1fb1",
+        "name": "Eco Warrior 1",
+        "email": "warrior1@test.com",
+        "password": "password123",
+        "score": 70,
+        "footprintHistory": [
+            {
+                "id": "a70e7ab9-cf03-4a69-9f0f-12ab09f663d7",
+                "date": "2026-06-19T16:23:18.355Z",
+                "inputs": {
+                    "transport": 15,
+                    "electricity": 8,
+                    "water": 200,
+                    "gas": 1,
+                    "waste": 2
+                },
+                "emissions": {
+                    "transport": 3.15,
+                    "electricity": 6.56,
+                    "water": 0.3,
+                    "gas": 1.5,
+                    "waste": 1
+                },
+                "total": 12.51
+            }
+        ],
+        "completedChallenges": [
+            "c1"
+        ]
+    }
+]

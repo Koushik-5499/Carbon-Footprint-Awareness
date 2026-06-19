@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - EcoTrack</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <script src="js/main.js"></script>
+    <script>
+        checkAuth();
+        renderAuthNav();
+    </script>
+
+    <div class="container" id="dashboardContent">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h2>Welcome, <span id="userName">Eco Warrior</span>!</h2>
+            <button onclick="downloadReport()" class="btn btn-secondary"><i class="fa-solid fa-file-pdf"></i> Download Report</button>
+        </div>
+
+        <div class="grid-3 mb-2">
+            <div class="glass-panel text-center">
+                <h3 style="color: var(--text-secondary); font-size: 1.1rem;">Sustainability Score</h3>
+                <h1 id="userScore" style="font-size: 3rem; color: var(--primary-green); margin: 1rem 0;">0</h1>
+                <p id="scoreLevel" style="font-weight: bold;">Needs Improvement</p>
+            </div>
+            
+            <div class="glass-panel text-center">
+                <h3 style="color: var(--text-secondary); font-size: 1.1rem;">Latest Footprint</h3>
+                <h1 id="latestFootprint" style="font-size: 3rem; color: #E53E3E; margin: 1rem 0;">0</h1>
+                <p style="font-weight: bold;">kg CO₂e</p>
+            </div>
+
+            <div class="glass-panel text-center">
+                <h3 style="color: var(--text-secondary); font-size: 1.1rem;">Challenges Completed</h3>
+                <h1 id="challengesCompleted" style="font-size: 3rem; color: var(--accent-color); margin: 1rem 0;">0</h1>
+                <p style="font-weight: bold;">Awesome!</p>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="glass-panel">
+                <h3>Emissions Breakdown (Latest)</h3>
+                <div style="height: 300px; display: flex; justify-content: center;">
+                    <canvas id="breakdownChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="glass-panel">
+                <h3>Footprint Trend</h3>
+                <div style="height: 300px;">
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
