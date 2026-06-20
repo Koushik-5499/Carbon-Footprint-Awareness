@@ -1,7 +1,10 @@
+process.env.PORT = 0;
 const calculatorController = require('../backend/controllers/calculatorController');
 const fs = require('fs');
+const actualFs = jest.requireActual('fs');
 
 jest.mock('fs', () => ({
+    ...jest.requireActual('fs'),
     promises: {
         readFile: jest.fn(),
         writeFile: jest.fn()
@@ -18,8 +21,20 @@ describe('Calculator Controller Emission Factors', () => {
             footprintHistory: []
         }];
         
-        fs.promises.readFile.mockResolvedValue(JSON.stringify(mockUsers));
-        fs.promises.writeFile.mockResolvedValue();
+        fs.promises.readFile.mockImplementation(async (filePath, options) => {
+            if (typeof filePath === 'string' && filePath.includes('users.json')) {
+                return JSON.stringify(mockUsers);
+            }
+            return actualFs.promises.readFile(filePath, options);
+        });
+
+        fs.promises.writeFile.mockImplementation(async (filePath, data, options) => {
+            if (typeof filePath === 'string' && filePath.includes('users.json')) {
+                mockUsers = JSON.parse(data);
+                return;
+            }
+            return actualFs.promises.writeFile(filePath, data, options);
+        });
 
         req = {
             user: { userId: 'user123' },
@@ -103,12 +118,45 @@ describe('Calculator Controller Emission Factors', () => {
     });
 
     test('Test negative input handling', async () => {
-        // The implementation calculates emission even for negative values
         req.body = { transport: -100 };
         await calculatorController.calculate(req, res);
         
         const responseArgs = res.json.mock.calls[0][0];
-        expect(res.status.mock.calls[0][0]).toBe(400); // Wait, this should return 400 now!
+        expect(res.status.mock.calls[0][0]).toBe(400);
         expect(responseArgs.error).toContain('non-negative');
+    });
+
+    test('Test that comparedToAverage and treesEquivalent are in the response', async () => {
+        req.body = { transport: 10 }; // 2.1 kg
+        await calculatorController.calculate(req, res);
+        
+        const responseArgs = res.json.mock.calls[0][0];
+        expect(responseArgs.comparedToAverage).toBeDefined();
+        expect(responseArgs.treesEquivalent).toBeDefined();
+        expect(responseArgs.comparedToAverage).toBe(Number((2.1 - 4000/365).toFixed(4)));
+        expect(responseArgs.treesEquivalent).toBe(Number((2.1 / 21).toFixed(4)));
+    });
+
+    test('Test that score increases after calculation', async () => {
+        req.body = { transport: 10 };
+        await calculatorController.calculate(req, res);
+        
+        const responseArgs = res.json.mock.calls[0][0];
+        expect(responseArgs.newScore).toBeGreaterThan(0);
+        expect(mockUsers[0].score).toBeGreaterThan(0);
+    });
+
+    test('Test that low footprint (<10 kg) gives more score points than high footprint', async () => {
+        req.body = { transport: 2 }; // 2 * 0.21 = 0.42 kg (low footprint)
+        await calculatorController.calculate(req, res);
+        const lowScore = mockUsers[0].score;
+
+        mockUsers[0].score = 0;
+        res.json.mockClear();
+        req.body = { transport: 200 }; // 200 * 0.21 = 42 kg (high footprint)
+        await calculatorController.calculate(req, res);
+        const highScore = mockUsers[0].score;
+
+        expect(lowScore).toBeGreaterThan(highScore);
     });
 });
