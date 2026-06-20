@@ -1,9 +1,13 @@
-const fs = require('fs');
 const path = require('path');
+const { readJSON } = require('../utils/fileHelpers');
 
 const usersFilePath = path.join(__dirname, '../data/users.json');
-const getUsers = () => JSON.parse(fs.readFileSync(usersFilePath));
 
+/**
+ * Ask AI a question
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ */
 exports.askAi = async (req, res) => {
     const { question } = req.body;
 
@@ -42,18 +46,23 @@ exports.askAi = async (req, res) => {
     }
 };
 
+/**
+ * Get personalized recommendations for a user
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ */
 exports.getRecommendations = async (req, res) => {
-    const userId = req.user.userId;
-    const users = getUsers();
-    const user = users.find(u => u.id === userId);
-
-    if (!user || user.footprintHistory.length === 0) {
-        return res.json({ recommendations: "Start logging your carbon footprint to get personalized recommendations!" });
-    }
-
-    const latestFootprint = user.footprintHistory[user.footprintHistory.length - 1];
-
     try {
+        const userId = req.user.userId;
+        const users = await readJSON(usersFilePath);
+        const user = users.find(u => u.id === userId);
+
+        if (!user || user.footprintHistory.length === 0) {
+            return res.json({ recommendations: "Start logging your carbon footprint to get personalized recommendations!" });
+        }
+
+        const latestFootprint = user.footprintHistory[user.footprintHistory.length - 1];
+
         const prompt = `Based on this user's recent carbon footprint data (in kg CO2e): Transport: ${latestFootprint.emissions.transport}, Electricity: ${latestFootprint.emissions.electricity}, Water: ${latestFootprint.emissions.water}, Gas: ${latestFootprint.emissions.gas}, Waste: ${latestFootprint.emissions.waste}. Provide 3 short, highly actionable tips to reduce their highest emission areas.`;
 
         const response = await fetch('https://text.pollinations.ai/', {

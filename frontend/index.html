@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EcoTrack helps you calculate, monitor, and reduce your carbon footprint through AI-powered insights and engaging challenges.">
     <title>EcoTrack - Carbon Footprint Awareness</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <a href="#main" class="skip-link sr-only">Skip to main content</a>
     <nav>
         <div class="logo">
-            <i class="fa-solid fa-leaf"></i> EcoTrack
+            <i class="fa-solid fa-leaf" aria-hidden="true"></i> EcoTrack
         </div>
         <ul class="nav-links" id="guestNav">
             <li><a href="#about">About</a></li>
@@ -18,25 +20,34 @@
         </ul>
     </nav>
 
-    <div class="container mt-3">
+    <main id="main" role="main">
+        <div class="container mt-3">
         <div class="grid-2 align-items-center">
             <div class="hero-text">
                 <h1 style="font-size: 3rem; line-height: 1.2;">Track your impact, <br><span style="color: var(--primary-green);">heal the planet.</span></h1>
                 <p class="mb-2" style="font-size: 1.2rem; color: var(--text-secondary);">EcoTrack helps you calculate, monitor, and reduce your carbon footprint through AI-powered insights and engaging challenges.</p>
                 
+                <div class="mb-2" style="display: flex; align-items: center; gap: 1rem; background: rgba(255, 255, 255, 0.4); padding: 0.75rem 1.25rem; border-radius: 16px; border: 1px solid var(--glass-border); width: fit-content;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Sustainable_Development_Goal_13Climate.svg" alt="UN SDG 13: Climate Action Badge" style="height: 50px; border-radius: 6px;">
+                    <div>
+                        <p style="font-weight: 600; color: var(--primary-green); margin: 0; font-size: 0.95rem;">Join 10,000+ eco warriors</p>
+                        <p style="color: var(--text-secondary); margin: 0; font-size: 0.85rem;">Who have saved over <strong>1,200,000 kg CO₂</strong></p>
+                    </div>
+                </div>
+                
                 <div class="glass-panel" id="authPanel">
-                    <div id="authAlert" class="alert hidden"></div>
+                    <div id="authAlert" class="alert hidden" role="alert" aria-live="polite"></div>
                     
                     <!-- Login Form -->
-                    <form id="loginForm">
+                    <form id="loginForm" aria-label="Login form">
                         <h2 class="text-center">Welcome Back</h2>
                         <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" id="loginEmail" class="form-control" required>
+                            <label for="loginEmail">Email</label>
+                            <input type="email" id="loginEmail" class="form-control" autocomplete="email" required>
                         </div>
                         <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" id="loginPassword" class="form-control" required>
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" class="form-control" autocomplete="current-password" required>
                         </div>
                         <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
                         <p class="text-center mt-1">
@@ -45,19 +56,19 @@
                     </form>
 
                     <!-- Register Form (Hidden by default) -->
-                    <form id="registerForm" class="hidden">
+                    <form id="registerForm" class="hidden" aria-label="Registration form">
                         <h2 class="text-center">Join EcoTrack</h2>
                         <div class="form-group">
-                            <label>Full Name</label>
-                            <input type="text" id="regName" class="form-control" required>
+                            <label for="regName">Full Name</label>
+                            <input type="text" id="regName" class="form-control" autocomplete="name" required>
                         </div>
                         <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" id="regEmail" class="form-control" required>
+                            <label for="regEmail">Email</label>
+                            <input type="email" id="regEmail" class="form-control" autocomplete="email" required>
                         </div>
                         <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" id="regPassword" class="form-control" required>
+                            <label for="regPassword">Password</label>
+                            <input type="password" id="regPassword" class="form-control" autocomplete="new-password" required>
                         </div>
                         <button type="submit" class="btn btn-primary" style="width: 100%;">Sign Up</button>
                         <p class="text-center mt-1">
@@ -72,6 +83,7 @@
             </div>
         </div>
     </div>
+    </main>
 
     <style>
         @keyframes float {

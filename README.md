@@ -104,3 +104,29 @@ Since the backend serves static frontend files, simply open your browser and go 
 ├── package.json
 └── README.md
 ```
+
+---
+
+## UN SDG Alignment
+
+EcoTrack is explicitly built to align with the United Nations Sustainable Development Goals (SDGs) for 2030, specifically targeting:
+
+- **SDG 13: Climate Action**: By offering personal footprint calculation, emissions breakdown visualization, and actionable reduction challenges, the platform actively empowers users to reduce their carbon output and take immediate climate action.
+- **SDG 11: Sustainable Cities & Communities**: Through community challenges like choosing public transit, composting, or using reusable containers, the platform fosters sustainable lifestyle changes that lower resource consumption and emissions at the city level.
+
+---
+
+## Social Impact
+
+Raising carbon footprint awareness is critical in the fight against climate change. By gamifying emission reductions, EcoTrack changes user behavior:
+1. **Behavioral Shift**: Users learn which activities contribute most to their emissions and take daily steps to reduce them.
+2. **Quantifiable Change**: Comparing user footprints against global daily averages (4,000 kg CO₂/year) highlights progress in clear, relatable terms (e.g. virtual trees planted, where 1 tree absorbs ~21 kg CO₂/year).
+3. **Collective Action**: Gamified scores and leaderboards foster community competition, turning isolated individual acts into collective carbon offset progress.
+
+---
+
+## Future Roadmap
+
+- **Community Features**: Shared team challenges, regional leaderboards, and collaborative community offset projects (e.g., local tree planting sponsorships).
+- **IoT & Smart Home Integration**: Automatically import energy and gas metrics via smart meter API integrations (e.g., Nest, Ecobee) and water flow sensors.
+- **City-Level Dashboards**: Municipal portals allowing city planners to view anonymized, aggregated sustainability and transit trends to inform local climate policy and infrastructure investments.

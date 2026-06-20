@@ -1,5 +1,5 @@
 // Base API URL
-const API_URL = 'http://localhost:3000';
+const API_URL = window.location.origin;
 
 // Centralized API call function
 async function apiCall(endpoint, method = 'GET', body = null) {
@@ -67,6 +67,7 @@ function renderAuthNav() {
         </div>
         <ul class="nav-links">
             <li><a href="dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
+            <li><a href="impact.html"><i class="fa-solid fa-earth-americas"></i> Impact</a></li>
             <li><a href="calculator.html"><i class="fa-solid fa-calculator"></i> Calculator</a></li>
             <li><a href="challenges.html"><i class="fa-solid fa-trophy"></i> Challenges</a></li>
             <li><a href="leaderboard.html"><i class="fa-solid fa-medal"></i> Leaderboard</a></li>
@@ -78,11 +79,12 @@ function renderAuthNav() {
     document.body.insertBefore(nav, document.body.firstChild);
 
     // Set active link
-    const currentPath = window.location.pathname.split('/').pop();
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
     const links = document.querySelectorAll('.nav-links a');
     links.forEach(link => {
         if (link.getAttribute('href') === currentPath) {
             link.classList.add('active');
+            link.setAttribute('aria-current', 'page');
         }
     });
 }

@@ -21,6 +21,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const history = profile.footprintHistory || [];
         
+        // Calculate impact metrics
+        const dailyAverage = 4000 / 365;
+        let totalSaved = 0;
+        history.forEach(entry => {
+            totalSaved += (dailyAverage - entry.total);
+        });
+        const equivalentTrees = totalSaved / 21;
+
+        document.getElementById('savedCO2').textContent = totalSaved.toFixed(2);
+        document.getElementById('equivalentTrees').textContent = Math.max(0, equivalentTrees).toFixed(2);
+        
         if (history.length > 0) {
             const latest = history[history.length - 1];
             document.getElementById('latestFootprint').textContent = latest.total.toFixed(2);

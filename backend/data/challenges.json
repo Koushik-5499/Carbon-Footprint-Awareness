@@ -40,5 +40,12 @@
         "description": "Compost kitchen and garden waste to reduce landfill emissions.",
         "points": 40,
         "type": "daily"
+    },
+    {
+        "id": "bf5b6e15-b1d4-4f66-8f53-9a2b14f0f523",
+        "title": "Plant a Tree",
+        "description": "Plant a tree in your garden",
+        "points": 50,
+        "type": "weekly"
     }
 ]

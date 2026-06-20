@@ -4,7 +4,7 @@
         "name": "Eco Warrior 1",
         "email": "warrior1@test.com",
         "password": "password123",
-        "score": 70,
+        "score": 120,
         "footprintHistory": [
             {
                 "id": "a70e7ab9-cf03-4a69-9f0f-12ab09f663d7",
@@ -24,10 +24,30 @@
                     "waste": 1
                 },
                 "total": 12.51
+            },
+            {
+                "id": "69c9633f-db63-4d19-a4c6-6ce9d23fb97a",
+                "date": "2026-06-20T06:37:43.716Z",
+                "inputs": {
+                    "transport": 20,
+                    "electricity": 10,
+                    "water": 150,
+                    "gas": 2,
+                    "waste": 3
+                },
+                "emissions": {
+                    "transport": 4.2,
+                    "electricity": 8.2,
+                    "water": 0.225,
+                    "gas": 3,
+                    "waste": 1.5
+                },
+                "total": 17.125
             }
         ],
         "completedChallenges": [
-            "c1"
+            "c1",
+            "c2"
         ]
     },
     {
@@ -35,8 +55,45 @@
         "name": "koushik",
         "email": "koushik@gmail.com",
         "password": "Kkoushik",
-        "score": 0,
+        "score": 80,
         "footprintHistory": [],
-        "completedChallenges": []
+        "completedChallenges": [
+            "c2",
+            "c1"
+        ]
+    },
+    {
+        "id": "f816e8f4-6188-4db5-8736-23115e51e15f",
+        "name": "koushik",
+        "email": "koushik4@gmail.com",
+        "password": "Kkoushik",
+        "score": 180,
+        "footprintHistory": [
+            {
+                "id": "dc995ded-da7a-4ff3-abba-f3f18e9f30a4",
+                "date": "2026-06-20T06:51:26.156Z",
+                "inputs": {
+                    "transport": 15,
+                    "electricity": 5,
+                    "water": 150,
+                    "gas": 0.5,
+                    "waste": 1
+                },
+                "emissions": {
+                    "transport": 3.15,
+                    "electricity": 4.1,
+                    "water": 0.225,
+                    "gas": 0.75,
+                    "waste": 0.5
+                },
+                "total": 8.725
+            }
+        ],
+        "completedChallenges": [
+            "c2",
+            "c1",
+            "c3",
+            "bf5b6e15-b1d4-4f66-8f53-9a2b14f0f523"
+        ]
     }
 ]

@@ -3,6 +3,14 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const morgan = require('morgan');
+
+if (process.env.NODE_ENV !== 'test' && (!process.env.JWT_SECRET || process.env.JWT_SECRET === 'your_super_secret_jwt_key_here')) {
+    console.error('ERROR: JWT_SECRET is not set or is using the default insecure value.');
+    process.exit(1);
+}
 
 // Route imports
 const authRoutes = require('./routes/authRoutes');
@@ -16,6 +24,16 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
+app.use(helmet());
+app.use(morgan('dev'));
+
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+    message: { error: 'Too many requests from this IP, please try again after 15 minutes' }
+});
+app.use(limiter);
+
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -71,10 +89,20 @@ app.use((req, res, next) => {
 
 // Error handling middleware
 app.use((err, req, res, next) => {
+    console.error(`[ERROR] ${new Date().toISOString()} - ${req.method} ${req.url} - ${err.message}`);
     console.error(err.stack);
-    res.status(500).json({ error: 'Something went wrong!', message: err.message });
+    
+    const isProduction = process.env.NODE_ENV === 'production';
+    const sanitizedMessage = isProduction ? 'An unexpected server error occurred.' : err.message;
+    
+    res.status(err.status || 500).json({ 
+        error: 'Something went wrong!', 
+        message: sanitizedMessage
+    });
 });
 
 app.listen(PORT, () => {
     console.log(`EcoTrack server running on http://localhost:${PORT}`);
 });
+
+module.exports = app;
