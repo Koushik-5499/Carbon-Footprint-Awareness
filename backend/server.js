@@ -100,14 +100,6 @@ app.use((req, res, next) => {
 });
 
 
-// Explicitly serve static subdirectories first
-app.use('/css', express.static(path.join(__dirname, '../frontend/css')));
-app.use('/js', express.static(path.join(__dirname, '../frontend/js')));
-app.use('/assets', express.static(path.join(__dirname, '../frontend/assets')));
-
-// Serve root static files (like dashboard.html, index.html etc.)
-app.use(express.static(path.join(__dirname, '../frontend')));
-
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/calculator', calculatorRoutes);
@@ -139,6 +131,22 @@ app.get('/admin.html', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/admin.html'));
 });
 
+if (process.env.NODE_ENV === 'test') {
+    app.get('/api/test-error', (req, res, next) => {
+        const err = new Error('Simulated Error');
+        err.status = 400;
+        next(err);
+    });
+}
+
+// Explicitly serve static subdirectories first
+app.use('/css', express.static(path.join(__dirname, '../frontend/css')));
+app.use('/js', express.static(path.join(__dirname, '../frontend/js')));
+app.use('/assets', express.static(path.join(__dirname, '../frontend/assets')));
+
+// Serve root static files (like dashboard.html, index.html etc.)
+app.use(express.static(path.join(__dirname, '../frontend')));
+
 // Fallback to index.html for SPA-like behavior or unhandled routes (excluding api and static files)
 app.use((req, res, next) => {
     const isApi = req.path.startsWith('/api');
@@ -164,8 +172,10 @@ app.use((err, req, res, next) => {
     });
 });
 
-app.listen(PORT, () => {
-    console.log(`EcoTrack server running on http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(PORT, () => {
+        console.log(`EcoTrack server running on http://localhost:${PORT}`);
+    });
+}
 
 module.exports = app;

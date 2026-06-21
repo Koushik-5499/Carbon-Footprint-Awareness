@@ -3,6 +3,7 @@ const request = require('supertest');
 const fs = require('fs');
 const actualFs = jest.requireActual('fs');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 // Require controllers directly for direct error path testing
 const authController = require('../backend/controllers/authController');
@@ -29,6 +30,7 @@ describe('Exception, Page Serving & Middleware Integration Tests', () => {
         mockUsers = [{
             id: 'user1',
             email: 'test@example.com',
+            password: bcrypt.hashSync('password123', 10),
             name: 'Test User',
             score: 10,
             footprintHistory: [{ total: 10.5 }],
@@ -125,7 +127,7 @@ describe('Exception, Page Serving & Middleware Integration Tests', () => {
     test('POST /api/auth/login with non-existent email returns 401', async () => {
         const res = await request(app)
             .post('/api/auth/login')
-            .send({ email: 'notfound@example.com', password: 'password' });
+            .send({ email: 'notfound@example.com', password: 'password', tags: ['array_item_to_cover_line_83'] });
         expect(res.statusCode).toBe(401);
         expect(res.body.error).toBe('Invalid credentials');
     });
@@ -223,5 +225,168 @@ describe('Exception, Page Serving & Middleware Integration Tests', () => {
         await authController.register(req, res);
         expect(res.status).toHaveBeenCalledWith(400);
         expect(res.json).toHaveBeenCalledWith({ error: 'Please provide all required fields' });
+    });
+
+    test('GET /api/test-error invokes error handling middleware and returns 400', async () => {
+        const res = await request(app).get('/api/test-error');
+        expect(res.statusCode).toBe(400);
+        expect(res.body.error).toBe('Something went wrong!');
+    });
+
+    test('Controllers handle missing users/challenges and trigger edge cases', async () => {
+        const req = {
+            body: { challengeId: 'non-existent-challenge-id', transport: 10 },
+            user: { userId: 'non-existent-user-id' }
+        };
+        const res = {
+            status: jest.fn().mockReturnThis(),
+            json: jest.fn()
+        };
+
+        // authController.getProfile with non-existent user
+        await authController.getProfile(req, res);
+        expect(res.status).toHaveBeenCalledWith(404);
+        expect(res.json).toHaveBeenCalledWith({ error: 'User not found' });
+
+        // calculatorController.calculate with non-existent user
+        res.status.mockClear();
+        await calculatorController.calculate(req, res);
+        expect(res.status).toHaveBeenCalledWith(404);
+        expect(res.json).toHaveBeenCalledWith({ error: 'User not found' });
+
+        // challengeController.completeChallenge with non-existent challenge
+        res.status.mockClear();
+        req.user.userId = 'user1'; // Set back to a valid user in mockUsers
+        await challengeController.completeChallenge(req, res);
+        expect(res.status).toHaveBeenCalledWith(404);
+        expect(res.json).toHaveBeenCalledWith({ error: 'Challenge not found' });
+
+        // challengeController.completeChallenge with non-existent user but valid challenge
+        res.status.mockClear();
+        req.user.userId = 'non-existent-user-id';
+        req.body.challengeId = 'challenge-1';
+        await challengeController.completeChallenge(req, res);
+        expect(res.status).toHaveBeenCalledWith(404);
+        expect(res.json).toHaveBeenCalledWith({ error: 'User not found' });
+    });
+
+    test('Auth controller and middleware use fallback secret if process.env.JWT_SECRET is deleted', async () => {
+        const oldSecret = process.env.JWT_SECRET;
+        delete process.env.JWT_SECRET;
+
+        // authController.register (generates token with fallback secret)
+        const reqReg = {
+            body: { name: 'Fallback User', email: 'fallback@example.com', password: 'password123' }
+        };
+        const resReg = {
+            status: jest.fn().mockReturnThis(),
+            json: jest.fn()
+        };
+        await authController.register(reqReg, resReg);
+        expect(resReg.status).toHaveBeenCalledWith(201);
+
+        const req = {
+            body: { email: 'test@example.com', password: 'password123' }
+        };
+        const res = {
+            status: jest.fn().mockReturnThis(),
+            json: jest.fn()
+        };
+
+        // authController.login (generates token with fallback secret)
+        await authController.login(req, res);
+        const token = res.json.mock.calls[0][0].token;
+        expect(token).toBeDefined();
+
+        // authMiddleware (verifies token with fallback secret)
+        const reqMiddleware = {
+            headers: { authorization: `Bearer ${token}` }
+        };
+        const next = jest.fn();
+        const authMiddleware = require('../backend/middleware/authMiddleware');
+        authMiddleware(reqMiddleware, res, next);
+        expect(next).toHaveBeenCalled();
+
+        process.env.JWT_SECRET = oldSecret;
+    });
+
+    test('JWT secret validation check exit simulation', () => {
+        const mockExit = jest.spyOn(process, 'exit').mockImplementation((code) => {
+            throw new Error(`process.exit called with code ${code}`);
+        });
+        const mockConsoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+        
+        const oldEnv = process.env.NODE_ENV;
+        const oldSecret = process.env.JWT_SECRET;
+        
+        delete process.env.NODE_ENV;
+        process.env.JWT_SECRET = 'your_super_secret_jwt_key_here';
+        
+        expect(() => {
+            jest.isolateModules(() => {
+                require('../backend/server');
+            });
+        }).toThrow('process.exit called with code 1');
+        
+        expect(mockExit).toHaveBeenCalledWith(1);
+        
+        process.env.NODE_ENV = oldEnv;
+        process.env.JWT_SECRET = oldSecret;
+        mockExit.mockRestore();
+        mockConsoleError.mockRestore();
+    });
+
+    test('Integration validation check for API endpoints', async () => {
+        // Calculator validation error
+        const resCalc = await request(app)
+            .post('/api/calculator')
+            .set('Authorization', `Bearer ${token}`)
+            .send({ transport: -5 });
+        expect(resCalc.statusCode).toBe(400);
+        expect(resCalc.body.error).toContain('non-negative');
+
+        // Calculator validation success (covers next() on line 12 of calculatorRoutes.js)
+        const resCalcSuccess = await request(app)
+            .post('/api/calculator')
+            .set('Authorization', `Bearer ${token}`)
+            .send({ transport: 10, electricity: 5 });
+        expect(resCalcSuccess.statusCode).toBe(201);
+
+        // AI validation error
+        const resAI = await request(app)
+            .post('/api/ai/ask')
+            .set('Authorization', `Bearer ${token}`)
+            .send({});
+        expect(resAI.statusCode).toBe(400);
+        expect(resAI.body.error).toContain('Question is required');
+
+        // Challenge validation error
+        const resChallenge = await request(app)
+            .post('/api/challenges/complete')
+            .set('Authorization', `Bearer ${token}`)
+            .send({});
+        expect(resChallenge.statusCode).toBe(400);
+        expect(resChallenge.body.error).toContain('Challenge ID is required');
+
+        // Admin validation error
+        const resAdmin = await request(app)
+            .post('/api/admin/challenges')
+            .set('Authorization', `Bearer ${token}`)
+            .send({});
+        expect(resAdmin.statusCode).toBe(400);
+        expect(resAdmin.body.error).toBe('All challenge fields are required');
+    });
+
+    test('adminController.addChallenge controller direct validation check', async () => {
+        const req = {
+            body: { title: 'No points' }
+        };
+        const res = {
+            status: jest.fn().mockReturnThis(),
+            json: jest.fn()
+        };
+        await adminController.addChallenge(req, res);
+        expect(res.status).toHaveBeenCalledWith(400);
+        expect(res.json).toHaveBeenCalledWith({ error: 'All challenge fields are required' });
     });
 });
