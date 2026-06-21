@@ -1,6 +1,14 @@
 document.getElementById('calculatorForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     
+    const fields = ['transport', 'electricity', 'water', 'gas', 'waste'];
+    
+    // Reset aria-invalid on all fields
+    fields.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.setAttribute('aria-invalid', 'false');
+    });
+    
     const data = {
         transport: parseFloat(document.getElementById('transport').value) || 0,
         electricity: parseFloat(document.getElementById('electricity').value) || 0,
@@ -20,5 +28,16 @@ document.getElementById('calculatorForm').addEventListener('submit', async (e) =
         
     } catch (err) {
         showAlert('calcAlert', err.message, 'error');
+        
+        // Dynamically set aria-invalid for fields mentioned in the error
+        fields.forEach(id => {
+            if (err.message && err.message.toLowerCase().includes(id)) {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.setAttribute('aria-invalid', 'true');
+                    el.focus();
+                }
+            }
+        });
     }
 });

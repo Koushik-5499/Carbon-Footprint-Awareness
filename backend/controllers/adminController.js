@@ -5,6 +5,20 @@ const { readJSON, writeJSON } = require('../utils/fileHelpers');
 const usersFilePath = path.join(__dirname, '../data/users.json');
 const challengesFilePath = path.join(__dirname, '../data/challenges.json');
 
+// Stats caching system for efficiency
+let statsCache = {
+    data: null,
+    timestamp: 0
+};
+
+/**
+ * Invalidate the admin statistics cache
+ */
+const invalidateAdminStatsCache = () => {
+    statsCache.data = null;
+    statsCache.timestamp = 0;
+};
+
 /**
  * Get dashboard statistics
  * @param {import('express').Request} req
@@ -12,6 +26,12 @@ const challengesFilePath = path.join(__dirname, '../data/challenges.json');
  */
 exports.getStats = async (req, res) => {
     try {
+        const now = Date.now();
+        // Return cached statistics if fresh (within 30s TTL)
+        if (statsCache.data && now - statsCache.timestamp < 30000) {
+            return res.status(200).json(statsCache.data);
+        }
+
         const users = await readJSON(usersFilePath);
         const challenges = await readJSON(challengesFilePath);
 
@@ -26,7 +46,7 @@ exports.getStats = async (req, res) => {
             });
         });
 
-        res.status(200).json({
+        const statsData = {
             totalUsers,
             totalEmissions: parseFloat(totalEmissions.toFixed(2)),
             totalChallengesCompleted,
@@ -38,12 +58,18 @@ exports.getStats = async (req, res) => {
                 score: u.score,
                 entriesCount: u.footprintHistory.length
             }))
-        });
+        };
+
+        statsCache.data = statsData;
+        statsCache.timestamp = now;
+
+        res.status(200).json(statsData);
     } catch (error) {
         console.error('Error in getStats:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+
 
 /**
  * Add a new challenge
@@ -69,6 +95,7 @@ exports.addChallenge = async (req, res) => {
 
         challenges.push(newChallenge);
         await writeJSON(challengesFilePath, challenges);
+        invalidateAdminStatsCache();
 
         res.status(201).json({ message: 'Challenge added successfully', challenge: newChallenge });
     } catch (error) {
@@ -76,3 +103,5 @@ exports.addChallenge = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+
+exports.invalidateAdminStatsCache = invalidateAdminStatsCache;

@@ -253,3 +253,411 @@ nav {
     border: 1px solid #86EFAC;
     display: block;
 }
+
+/* Custom Utility Classes to avoid inline styling */
+.hero-title {
+    font-size: 3rem;
+    line-height: 1.2;
+}
+
+.text-primary-green {
+    color: var(--primary-green);
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+
+.badge-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 0.75rem 1.25rem;
+    border-radius: 16px;
+    border: 1px solid var(--glass-border);
+    width: fit-content;
+}
+
+.sdg-badge-icon {
+    height: 50px;
+    border-radius: 6px;
+}
+
+.badge-headline {
+    font-weight: 600;
+    color: var(--primary-green);
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.badge-subline {
+    color: var(--text-secondary);
+    margin: 0;
+    font-size: 0.85rem;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.hero-ill {
+    max-width: 100%;
+    border-radius: 20px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.flex-between-center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.text-secondary-label {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+.text-secondary-sm {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.font-2r {
+    font-size: 2rem;
+}
+
+.font-3r {
+    font-size: 3rem;
+}
+
+.font-4r {
+    font-size: 4rem;
+}
+
+.color-red {
+    color: #E53E3E;
+}
+
+.border-collapse {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-header-border {
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+}
+
+.table-row-border {
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.th-left {
+    padding: 0.5rem;
+    text-align: left;
+}
+
+.th-right {
+    padding: 0.5rem;
+    text-align: right;
+}
+
+.td-left-bold {
+    padding: 0.5rem;
+    font-weight: 500;
+}
+
+.td-sec {
+    padding: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.td-right {
+    padding: 0.5rem;
+    text-align: right;
+}
+
+.td-right-bold {
+    padding: 0.5rem;
+    text-align: right;
+    font-weight: bold;
+    color: var(--primary-green);
+}
+
+.gap-1 {
+    gap: 1rem;
+}
+
+.gap-1-5 {
+    gap: 1.5rem;
+}
+
+.flex-center-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-dir-col {
+    flex-direction: column;
+}
+
+.calc-result-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.relative-overflow {
+    position: relative;
+    overflow: hidden;
+}
+
+.icon-earth {
+    font-size: 3rem;
+    color: var(--primary-green);
+}
+
+.bold-green {
+    color: var(--primary-green);
+    font-size: 1.2rem;
+}
+
+.bold-light-green {
+    color: var(--light-green);
+    font-size: 1.2rem;
+}
+
+.btn-small-link {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+.btn-large-link {
+    padding: 0.75rem 2rem;
+}
+
+.lh-1-6 {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-top: 1rem;
+}
+
+.chat-box {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+}
+
+.chat-messages-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    background: rgba(255,255,255,0.4);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.margin-bottom-1r {
+    margin-bottom: 1rem;
+}
+
+.chat-input-form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.color-accent {
+    color: var(--accent-color);
+}
+
+.color-light-green {
+    color: var(--light-green);
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.chart-container-doughnut {
+    height: 300px;
+    display: flex;
+    justify-content: center;
+}
+
+.chart-container-line {
+    height: 300px;
+}
+
+.flex-align-center {
+    display: flex;
+    align-items: center;
+}
+
+.mb-0-5 {
+    margin-bottom: 0.5rem;
+}
+
+.impact-text {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.impact-subtext {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.color-orange {
+    color: #DD6B20;
+}
+
+.font-2-5r {
+    font-size: 2.5rem;
+}
+
+.mt-0-5 {
+    margin-top: 0.5rem;
+}
+
+.text-size-0-9 {
+    font-size: 0.9rem;
+}
+
+.sdg-intro-text {
+    max-width: 800px;
+    margin: 0 auto 2rem auto;
+    color: var(--text-secondary);
+}
+
+.color-sdg13 {
+    color: #3F7E44;
+}
+
+.sdg-target-text {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+}
+
+.sdg-desc-text {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    text-align: justify;
+    line-height: 1.5;
+}
+
+.color-sdg11 {
+    color: #F99D26;
+}
+
+.forest-extra-text {
+    align-self: center;
+    font-weight: bold;
+    color: var(--primary-green);
+}
+
+.forest-empty-text {
+    color: var(--text-secondary);
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.flex-col-start {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.font-1-2r {
+    font-size: 1.2rem;
+}
+
+.max-w-800 {
+    max-width: 800px;
+}
+
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.th-left-1r {
+    padding: 1rem;
+    text-align: left;
+}
+
+.th-right-1r {
+    padding: 1rem;
+    text-align: right;
+}
+
+.td-rank {
+    padding: 1rem;
+    font-weight: bold;
+}
+
+.td-user {
+    padding: 1rem;
+    font-weight: 500;
+}
+
+.td-score {
+    padding: 1rem;
+    text-align: right;
+    font-weight: bold;
+    color: var(--primary-green);
+}
+
+.relative {
+    position: relative;
+}
+
+.completed-card {
+    opacity: 0.7;
+}
+
+.check-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: var(--primary-green);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.challenge-tag {
+    background: var(--bg-main);
+    color: var(--primary-green);
+    padding: 0.2rem 0.5rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.challenge-desc {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    min-height: 40px;
+}
+
+.points-badge {
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+
+
+
+
+
+

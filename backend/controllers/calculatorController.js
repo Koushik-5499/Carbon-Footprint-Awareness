@@ -1,8 +1,9 @@
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 const { invalidateCache } = require('./leaderboardController');
+const { invalidateAdminStatsCache } = require('./adminController');
 const { readJSON, writeJSON } = require('../utils/fileHelpers');
-const { EMISSION_FACTORS } = require('../config/constants');
+const { EMISSION_FACTORS, GLOBAL_AVERAGE_FOOTPRINT_DAY, TREE_ABSORPTION_RATE } = require('../config/constants');
 
 const usersFilePath = path.join(__dirname, '../data/users.json');
 
@@ -59,11 +60,12 @@ exports.calculate = async (req, res) => {
         
         users[userIndex].score += scoreAddition;
 
-        const comparedToAverage = totalEmissions - (4000 / 365);
-        const treesEquivalent = totalEmissions / 21;
+        const comparedToAverage = totalEmissions - GLOBAL_AVERAGE_FOOTPRINT_DAY;
+        const treesEquivalent = totalEmissions / TREE_ABSORPTION_RATE;
 
         await writeJSON(usersFilePath, users);
         invalidateCache();
+        invalidateAdminStatsCache();
 
         res.status(201).json({
             message: 'Calculation successful',

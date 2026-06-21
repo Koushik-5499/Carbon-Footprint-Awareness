@@ -8,15 +8,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Set performance level
         const levelEl = document.getElementById('scoreLevel');
+        levelEl.className = 'font-bold';
         if (profile.score > 500) {
             levelEl.textContent = 'Excellent 🌿';
-            levelEl.style.color = 'var(--primary-green)';
+            levelEl.classList.add('text-primary-green');
         } else if (profile.score > 200) {
             levelEl.textContent = 'Good 🍃';
-            levelEl.style.color = 'var(--light-green)';
+            levelEl.classList.add('color-light-green');
         } else if (profile.score > 50) {
             levelEl.textContent = 'Average 🍂';
-            levelEl.style.color = '#DD6B20';
+            levelEl.classList.add('color-orange');
         }
 
         const history = profile.footprintHistory || [];

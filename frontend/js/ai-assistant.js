@@ -28,7 +28,7 @@ document.getElementById('chatForm').addEventListener('submit', async (e) => {
 function appendMessage(sender, text) {
     const chatMessages = document.getElementById('chatMessages');
     const messageEl = document.createElement('div');
-    messageEl.style.marginBottom = '1rem';
+    messageEl.className = 'margin-bottom-1r';
     messageEl.innerHTML = `<strong>${sender}:</strong> ${formatText(text)}`;
     chatMessages.appendChild(messageEl);
     chatMessages.scrollTop = chatMessages.scrollHeight;

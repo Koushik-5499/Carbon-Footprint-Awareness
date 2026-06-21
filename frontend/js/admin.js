@@ -16,12 +16,12 @@ async function loadStats() {
         
         stats.users.forEach(user => {
             const tr = document.createElement('tr');
-            tr.style.borderBottom = '1px solid rgba(0,0,0,0.05)';
+            tr.className = 'table-row-border';
             tr.innerHTML = `
-                <td style="padding: 0.5rem; font-weight: 500;">${user.name}</td>
-                <td style="padding: 0.5rem; color: var(--text-secondary);">${user.email}</td>
-                <td style="padding: 0.5rem; text-align: right;">${user.entriesCount}</td>
-                <td style="padding: 0.5rem; text-align: right; font-weight: bold; color: var(--primary-green);">${user.score}</td>
+                <td class="td-left-bold">${user.name}</td>
+                <td class="td-sec">${user.email}</td>
+                <td class="td-right">${user.entriesCount}</td>
+                <td class="td-right-bold">${user.score}</td>
             `;
             tbody.appendChild(tr);
         });

@@ -1,5 +1,6 @@
 const path = require('path');
 const { invalidateCache } = require('./leaderboardController');
+const { invalidateAdminStatsCache } = require('./adminController');
 const { readJSON, writeJSON } = require('../utils/fileHelpers');
 
 const usersFilePath = path.join(__dirname, '../data/users.json');
@@ -50,6 +51,7 @@ exports.completeChallenge = async (req, res) => {
 
         await writeJSON(usersFilePath, users);
         invalidateCache();
+        invalidateAdminStatsCache();
 
         res.status(200).json({ message: 'Challenge completed successfully', pointsEarned: challenge.points, newScore: users[userIndex].score });
     } catch (error) {

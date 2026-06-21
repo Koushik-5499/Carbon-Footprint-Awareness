@@ -23,20 +23,20 @@
 
         <div class="grid-4 mb-2">
             <div class="glass-panel text-center">
-                <h3 style="color: var(--text-secondary); font-size: 1rem;">Total Users</h3>
-                <h2 id="statUsers" style="font-size: 2rem; color: var(--primary-green);">0</h2>
+                <h3 class="text-secondary-sm">Total Users</h3>
+                <h2 id="statUsers" class="font-2r text-primary-green">0</h2>
             </div>
             <div class="glass-panel text-center">
-                <h3 style="color: var(--text-secondary); font-size: 1rem;">Total Emissions Logged</h3>
-                <h2 id="statEmissions" style="font-size: 2rem; color: #E53E3E;">0 kg</h2>
+                <h3 class="text-secondary-sm">Total Emissions Logged</h3>
+                <h2 id="statEmissions" class="font-2r color-red">0 kg</h2>
             </div>
             <div class="glass-panel text-center">
-                <h3 style="color: var(--text-secondary); font-size: 1rem;">Challenges Completed</h3>
-                <h2 id="statCompleted" style="font-size: 2rem; color: var(--accent-color);">0</h2>
+                <h3 class="text-secondary-sm">Challenges Completed</h3>
+                <h2 id="statCompleted" class="font-2r color-accent">0</h2>
             </div>
             <div class="glass-panel text-center">
-                <h3 style="color: var(--text-secondary); font-size: 1rem;">Available Challenges</h3>
-                <h2 id="statChallenges" style="font-size: 2rem; color: var(--light-green);">0</h2>
+                <h3 class="text-secondary-sm">Available Challenges</h3>
+                <h2 id="statChallenges" class="font-2r color-light-green">0</h2>
             </div>
         </div>
 
@@ -44,13 +44,13 @@
             <!-- User Activity -->
             <div class="glass-panel">
                 <h3>User Activity Overview</h3>
-                <table style="width: 100%; border-collapse: collapse;" id="usersTable">
+                <table class="border-collapse" id="usersTable">
                     <thead>
-                        <tr style="border-bottom: 2px solid rgba(0,0,0,0.1);">
-                            <th style="padding: 0.5rem; text-align: left;">Name</th>
-                            <th style="padding: 0.5rem; text-align: left;">Email</th>
-                            <th style="padding: 0.5rem; text-align: right;">Entries</th>
-                            <th style="padding: 0.5rem; text-align: right;">Score</th>
+                        <tr class="table-header-border">
+                            <th class="th-left">Name</th>
+                            <th class="th-left">Email</th>
+                            <th class="th-right">Entries</th>
+                            <th class="th-right">Score</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,7 +71,7 @@
                         <label for="challengeDesc">Description</label>
                         <input type="text" id="challengeDesc" class="form-control" placeholder="e.g. Use a reusable bottle/cup today." required>
                     </div>
-                    <div class="grid-2" style="gap: 1rem;">
+                    <div class="grid-2 gap-1">
                         <div class="form-group">
                             <label for="challengePoints">Points</label>
                             <input type="number" id="challengePoints" class="form-control" placeholder="e.g. 50" required>
@@ -84,7 +84,7 @@
                             </select>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Create Challenge</button>
+                    <button type="submit" class="btn btn-primary w-100">Create Challenge</button>
                 </form>
             </div>
         </div>

@@ -78,7 +78,7 @@
 
     <main id="main" role="main">
         <div class="container">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <div class="flex-between-center mb-2">
                 <h2>Social Impact & UN SDG Alignment</h2>
                 <a href="dashboard.html" class="btn btn-secondary"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to Dashboard</a>
             </div>
@@ -86,31 +86,31 @@
             <!-- Impact Overview Stats -->
             <div class="grid-3 mb-2">
                 <div class="impact-card">
-                    <i class="fa-solid fa-cloud-arrow-down" style="font-size: 2.5rem; color: var(--primary-green); margin-bottom: 1rem;" aria-hidden="true"></i>
-                    <h3 style="font-size: 1.1rem; color: var(--text-secondary);">Total CO₂ Saved</h3>
-                    <h1 id="totalSaved" style="font-size: 2.5rem; color: var(--primary-green); margin: 0.5rem 0;">0.00 kg</h1>
-                    <p style="font-size: 0.9rem;">Compared to average person footprint (10.96 kg/day)</p>
+                    <i class="fa-solid fa-cloud-arrow-down font-2-5r text-primary-green mb-1" aria-hidden="true"></i>
+                    <h3 class="text-secondary-label">Total CO₂ Saved</h3>
+                    <h1 id="totalSaved" class="font-2-5r text-primary-green mt-0-5 mb-0-5">0.00 kg</h1>
+                    <p class="text-size-0-9">Compared to average person footprint (10.96 kg/day)</p>
                 </div>
                 
                 <div class="impact-card">
-                    <i class="fa-solid fa-tree" style="font-size: 2.5rem; color: var(--light-green); margin-bottom: 1rem;" aria-hidden="true"></i>
-                    <h3 style="font-size: 1.1rem; color: var(--text-secondary);">Trees Equivalent</h3>
-                    <h1 id="treesEquivalent" style="font-size: 2.5rem; color: var(--light-green); margin: 0.5rem 0;">0.00</h1>
-                    <p style="font-size: 0.9rem;">1 tree absorbs ~21 kg of CO₂ per year</p>
+                    <i class="fa-solid fa-tree font-2-5r color-light-green mb-1" aria-hidden="true"></i>
+                    <h3 class="text-secondary-label">Trees Equivalent</h3>
+                    <h1 id="treesEquivalent" class="font-2-5r color-light-green mt-0-5 mb-0-5">0.00</h1>
+                    <p class="text-size-0-9">1 tree absorbs ~21 kg of CO₂ per year</p>
                 </div>
 
                 <div class="impact-card">
-                    <i class="fa-solid fa-gauge" style="font-size: 2.5rem; color: #E53E3E; margin-bottom: 1rem;" aria-hidden="true"></i>
-                    <h3 style="font-size: 1.1rem; color: var(--text-secondary);">Your Average Daily Footprint</h3>
-                    <h1 id="averageFootprint" style="font-size: 2.5rem; color: #E53E3E; margin: 0.5rem 0;">0.00 kg</h1>
-                    <p style="font-size: 0.9rem;">Global average: ~10.96 kg/day (4,000 kg/year)</p>
+                    <i class="fa-solid fa-gauge font-2-5r color-red mb-1" aria-hidden="true"></i>
+                    <h3 class="text-secondary-label">Your Average Daily Footprint</h3>
+                    <h1 id="averageFootprint" class="font-2-5r color-red mt-0-5 mb-0-5">0.00 kg</h1>
+                    <p class="text-size-0-9">Global average: ~10.96 kg/day (4,000 kg/year)</p>
                 </div>
             </div>
 
             <!-- Tree Forest Visualization -->
             <div class="glass-panel mb-2">
                 <h3>Your Virtual Forest</h3>
-                <p class="mb-1" style="color: var(--text-secondary);">For every 21 kg of CO₂ you save compared to the average global footprint, you grow one virtual tree!</p>
+                <p class="mb-1 text-secondary-sm">For every 21 kg of CO₂ you save compared to the average global footprint, you grow one virtual tree!</p>
                 <div class="trees-visual" id="forestContainer">
                     <!-- Tree icons will be dynamically injected here -->
                 </div>
@@ -118,7 +118,7 @@
 
             <!-- SDG Alignment -->
             <h2 class="text-center mt-3">UN Sustainable Development Goals (SDG) Alignment</h2>
-            <p class="text-center" style="max-width: 800px; margin: 0 auto 2rem auto; color: var(--text-secondary);">
+            <p class="text-center sdg-intro-text">
                 EcoTrack directly contributes to the United Nations 2030 Agenda for Sustainable Development. 
                 By tracking emissions and adopting eco-friendly challenges, your efforts directly impact these global goals.
             </p>
@@ -127,13 +127,13 @@
                 <!-- SDG 13 -->
                 <div class="sdg-badge-card">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Sustainable_Development_Goal_13Climate.svg" 
-                         alt="UN SDG 13: Climate Action Badge" 
-                         class="sdg-image">
-                    <h3 style="color: #3F7E44;">SDG 13: Climate Action</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 0.5rem;">
+                          alt="UN SDG 13: Climate Action Badge" 
+                          class="sdg-image">
+                    <h3 class="color-sdg13">SDG 13: Climate Action</h3>
+                    <p class="sdg-target-text">
                         <strong>Target:</strong> Take urgent action to combat climate change and its impacts.
                     </p>
-                    <p style="margin-top: 1rem; font-size: 0.9rem; text-align: justify; line-height: 1.5;">
+                    <p class="sdg-desc-text">
                         EcoTrack supports SDG 13 by raising individual footprint awareness, enabling daily tracking of carbon emissions, and encouraging active habits (like reduction in transport emissions and home heating fuel) that prevent CO₂ build-up in our atmosphere.
                     </p>
                 </div>
@@ -141,13 +141,13 @@
                 <!-- SDG 11 -->
                 <div class="sdg-badge-card">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Sustainable_Development_Goal_11SustainableCities.svg" 
-                         alt="UN SDG 11: Sustainable Cities and Communities Badge" 
-                         class="sdg-image">
-                    <h3 style="color: #F99D26;">SDG 11: Sustainable Cities & Communities</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 0.5rem;">
+                          alt="UN SDG 11: Sustainable Cities and Communities Badge" 
+                          class="sdg-image">
+                    <h3 class="color-sdg11">SDG 11: Sustainable Cities & Communities</h3>
+                    <p class="sdg-target-text">
                         <strong>Target:</strong> Make cities and human settlements inclusive, safe, resilient, and sustainable.
                     </p>
-                    <p style="margin-top: 1rem; font-size: 0.9rem; text-align: justify; line-height: 1.5;">
+                    <p class="sdg-desc-text">
                         EcoTrack helps lower municipal waste, reduce reliance on private transport, and optimize clean utility consumption. By completing localized sustainability challenges, you actively lower the aggregate footprint of your local community and town.
                     </p>
                 </div>
@@ -155,7 +155,7 @@
             
             <!-- Link Back to Dashboard -->
             <div class="text-center mt-3 mb-2">
-                <a href="dashboard.html" class="btn btn-primary" style="padding: 0.75rem 2rem;"><i class="fa-solid fa-house" aria-hidden="true"></i> Return to Dashboard</a>
+                <a href="dashboard.html" class="btn btn-primary btn-large-link"><i class="fa-solid fa-house" aria-hidden="true"></i> Return to Dashboard</a>
             </div>
         </div>
     </main>
@@ -200,13 +200,11 @@
                     if (wholeTreesCount > 100) {
                         const extraSpan = document.createElement('span');
                         extraSpan.textContent = ` + ${wholeTreesCount - 100} more trees!`;
-                        extraSpan.style.alignSelf = 'center';
-                        extraSpan.style.fontWeight = 'bold';
-                        extraSpan.style.color = 'var(--primary-green)';
+                        extraSpan.className = 'forest-extra-text';
                         forestContainer.appendChild(extraSpan);
                     }
                 } else {
-                    forestContainer.innerHTML = '<p style="color: var(--text-secondary); width: 100%; text-align: center; padding: 1rem 0;">Start logging low-emission footprints to grow your forest!</p>';
+                    forestContainer.innerHTML = '<p class="forest-empty-text">Start logging low-emission footprints to grow your forest!</p>';
                 }
 
             } catch (err) {

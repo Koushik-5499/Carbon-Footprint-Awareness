@@ -19,20 +19,19 @@ function renderChallenges(challenges, completedIds) {
         const isCompleted = completedIds.includes(challenge.id);
         
         const card = document.createElement('div');
-        card.className = 'glass-panel';
-        card.style.position = 'relative';
+        card.className = 'glass-panel relative';
         
         if (isCompleted) {
-            card.style.opacity = '0.7';
+            card.classList.add('completed-card');
         }
 
         card.innerHTML = `
-            ${isCompleted ? '<div style="position:absolute; top:-10px; right:-10px; background:var(--primary-green); color:white; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center;"><i class="fa-solid fa-check"></i></div>' : ''}
-            <span style="background: var(--bg-main); color: var(--primary-green); padding: 0.2rem 0.5rem; border-radius: 8px; font-size: 0.8rem; font-weight: bold;">${challenge.type.toUpperCase()}</span>
+            ${isCompleted ? '<div class="check-badge"><i class="fa-solid fa-check"></i></div>' : ''}
+            <span class="challenge-tag">${challenge.type.toUpperCase()}</span>
             <h3 class="mt-1">${challenge.title}</h3>
-            <p style="color: var(--text-secondary); margin-bottom: 1rem; min-height: 40px;">${challenge.description}</p>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="font-weight: bold; color: var(--accent-color);"><i class="fa-solid fa-star"></i> ${challenge.points} pts</span>
+            <p class="challenge-desc">${challenge.description}</p>
+            <div class="flex-between-center">
+                <span class="points-badge"><i class="fa-solid fa-star"></i> ${challenge.points} pts</span>
                 <button class="btn btn-${isCompleted ? 'secondary' : 'primary'}" 
                         ${isCompleted ? 'disabled' : ''} 
                         onclick="completeChallenge('${challenge.id}')">

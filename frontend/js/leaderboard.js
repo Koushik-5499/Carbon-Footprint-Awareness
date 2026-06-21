@@ -18,12 +18,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
 
             const tr = document.createElement('tr');
-            tr.style.borderBottom = '1px solid rgba(0,0,0,0.05)';
+            tr.className = 'table-row-border';
             
             tr.innerHTML = `
-                <td style="padding: 1rem; font-weight: bold;">${icon}${rankDisplay}</td>
-                <td style="padding: 1rem; font-weight: 500;">${user.name}</td>
-                <td style="padding: 1rem; text-align: right; font-weight: bold; color: var(--primary-green);">${user.score}</td>
+                <td class="td-rank">${icon}${rankDisplay}</td>
+                <td class="td-user">${user.name}</td>
+                <td class="td-score">${user.score}</td>
             `;
             
             tbody.appendChild(tr);

@@ -6,6 +6,8 @@ const path = require('path');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const morgan = require('morgan');
+const compression = require('compression');
+const hpp = require('hpp');
 
 if (process.env.NODE_ENV !== 'test' && (!process.env.JWT_SECRET || process.env.JWT_SECRET === 'your_super_secret_jwt_key_here')) {
     console.error('ERROR: JWT_SECRET is not set or is using the default insecure value.');
@@ -23,10 +25,27 @@ const adminRoutes = require('./routes/adminRoutes');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
-app.use(helmet());
+// Efficiency: Enable Gzip Compression
+app.use(compression());
+
+// Security: Helmet for hardening HTTP headers (with strict Content Security Policy)
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com"],
+            styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdnjs.cloudflare.com"],
+            fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com"],
+            imgSrc: ["'self'", "data:", "https://upload.wikimedia.org", "https://images.unsplash.com", "https://text.pollinations.ai"],
+            connectSrc: ["'self'", "https://text.pollinations.ai", "https://api.pollinations.ai"]
+        }
+    }
+}));
+
+// Logger
 app.use(morgan('dev'));
 
+// Security: Global Rate Limiter
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
     max: 100, // limit each IP to 100 requests per windowMs
@@ -34,8 +53,52 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-app.use(cors());
+// Security: Stricter rate limiter for auth routes
+const authLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 15,
+    message: { error: 'Too many authentication attempts, please try again after 15 minutes' }
+});
+app.use('/api/auth/login', authLimiter);
+app.use('/api/auth/register', authLimiter);
+
+// Security: CORS configuration
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(bodyParser.json());
+
+// Security: Prevent HTTP Parameter Pollution
+app.use(hpp());
+
+// Security: XSS input sanitization middleware
+const sanitizeInput = (val) => {
+    if (typeof val === 'string') {
+        return val.replace(/<[^>]*>/g, '').trim();
+    }
+    if (Array.isArray(val)) {
+        return val.map(sanitizeInput);
+    }
+    if (typeof val === 'object' && val !== null) {
+        const sanitized = {};
+        for (const [key, value] of Object.entries(val)) {
+            sanitized[key] = sanitizeInput(value);
+        }
+        return sanitized;
+    }
+    return val;
+};
+
+app.use((req, res, next) => {
+    req.body = sanitizeInput(req.body);
+    req.query = sanitizeInput(req.query);
+    req.params = sanitizeInput(req.params);
+    next();
+});
+
 
 // Explicitly serve static subdirectories first
 app.use('/css', express.static(path.join(__dirname, '../frontend/css')));

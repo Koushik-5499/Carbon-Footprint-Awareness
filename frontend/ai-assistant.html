@@ -22,22 +22,22 @@
         
         <div class="grid-2">
             <!-- Left Side: Recommendations & Tips -->
-            <div class="glass-panel" style="display: flex; flex-direction: column; justify-content: flex-start;">
+            <div class="glass-panel flex-col-start">
                 <h3>Personalized Recommendations</h3>
-                <div id="recommendationsContainer" style="color: var(--text-secondary); line-height: 1.6; margin-top: 1rem;">
+                <div id="recommendationsContainer" class="lh-1-6">
                     Loading your personalized eco-recommendations...
                 </div>
             </div>
 
             <!-- Right Side: Chat Interface -->
-            <div class="glass-panel" style="display: flex; flex-direction: column; height: 500px;">
+            <div class="glass-panel chat-box">
                 <h3>Ask a Question</h3>
-                <div id="chatMessages" style="flex-grow: 1; overflow-y: auto; padding: 1rem; background: rgba(255,255,255,0.4); border-radius: 12px; margin-bottom: 1rem; border: 1px solid rgba(0,0,0,0.05);">
-                    <div style="margin-bottom: 1rem;">
+                <div id="chatMessages" class="chat-messages-container">
+                    <div class="margin-bottom-1r">
                         <strong>EcoBot:</strong> Hi! I'm your sustainability assistant. Ask me anything about reducing emissions, saving water, or carbon footprint calculations!
                     </div>
                 </div>
-                <form id="chatForm" style="display: flex; gap: 0.5rem;" aria-label="Chat form">
+                <form id="chatForm" class="chat-input-form" aria-label="Chat form">
                     <label for="chatInput" class="sr-only">Ask a question</label>
                     <input type="text" id="chatInput" class="form-control" placeholder="Ask a question..." required>
                     <button type="submit" class="btn btn-primary" aria-label="Send message"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i></button>

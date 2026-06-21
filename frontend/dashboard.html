@@ -20,61 +20,61 @@
 
     <main id="main" role="main">
         <div class="container" id="dashboardContent">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <div class="flex-between-center mb-2">
                 <h2>Welcome, <span id="userName">Eco Warrior</span>!</h2>
                 <button onclick="downloadReport()" class="btn btn-secondary"><i class="fa-solid fa-file-pdf" aria-hidden="true"></i> Download Report</button>
             </div>
 
         <div class="grid-3 mb-2">
             <div class="glass-panel text-center">
-                <h3 style="color: var(--text-secondary); font-size: 1.1rem;">Sustainability Score</h3>
-                <h1 id="userScore" style="font-size: 3rem; color: var(--primary-green); margin: 1rem 0;">0</h1>
-                <p id="scoreLevel" style="font-weight: bold;">Needs Improvement</p>
+                <h3 class="text-secondary-label">Sustainability Score</h3>
+                <h1 id="userScore" class="font-3r text-primary-green mt-1 mb-1">0</h1>
+                <p id="scoreLevel" class="font-bold">Needs Improvement</p>
             </div>
             
             <div class="glass-panel text-center">
-                <h3 style="color: var(--text-secondary); font-size: 1.1rem;">Latest Footprint</h3>
-                <h1 id="latestFootprint" style="font-size: 3rem; color: #E53E3E; margin: 1rem 0;">0</h1>
-                <p style="font-weight: bold;">kg CO₂e</p>
+                <h3 class="text-secondary-label">Latest Footprint</h3>
+                <h1 id="latestFootprint" class="font-3r color-red mt-1 mb-1">0</h1>
+                <p class="font-bold">kg CO₂e</p>
             </div>
 
             <div class="glass-panel text-center">
-                <h3 style="color: var(--text-secondary); font-size: 1.1rem;">Challenges Completed</h3>
-                <h1 id="challengesCompleted" style="font-size: 3rem; color: var(--accent-color); margin: 1rem 0;">0</h1>
-                <p style="font-weight: bold;">Awesome!</p>
+                <h3 class="text-secondary-label">Challenges Completed</h3>
+                <h1 id="challengesCompleted" class="font-3r color-accent mt-1 mb-1">0</h1>
+                <p class="font-bold">Awesome!</p>
             </div>
         </div>
 
         <div class="grid-2">
             <div class="glass-panel">
                 <h3>Emissions Breakdown (Latest)</h3>
-                <div style="height: 300px; display: flex; justify-content: center;">
+                <div class="chart-container-doughnut">
                     <canvas id="breakdownChart"></canvas>
                 </div>
             </div>
             
             <div class="glass-panel">
                 <h3>Footprint Trend</h3>
-                <div style="height: 300px;">
+                <div class="chart-container-line">
                     <canvas id="trendChart"></canvas>
                 </div>
             </div>
         </div>
 
-        <div class="glass-panel mt-2" style="margin-top: 2rem; position: relative; overflow: hidden;">
-            <div style="display: flex; align-items: center; gap: 1.5rem;">
-                <div style="font-size: 3rem; color: var(--primary-green);">
+        <div class="glass-panel mt-2 relative-overflow">
+            <div class="flex-align-center gap-1-5">
+                <div class="icon-earth">
                     <i class="fa-solid fa-earth-americas" aria-hidden="true"></i>
                 </div>
                 <div>
-                    <h3 style="margin-bottom: 0.5rem;">Your Impact</h3>
-                    <p style="font-size: 1.1rem; margin-bottom: 0.25rem;">
-                        You've saved <strong id="savedCO2" style="color: var(--primary-green); font-size: 1.2rem;">0.00</strong> kg CO₂ compared to average.
+                    <h3 class="mb-0-5">Your Impact</h3>
+                    <p class="impact-text">
+                        You've saved <strong id="savedCO2" class="bold-green">0.00</strong> kg CO₂ compared to average.
                     </p>
-                    <p style="font-size: 1.1rem; margin-bottom: 1rem;">
-                        Equivalent to planting <strong id="equivalentTrees" style="color: var(--light-green); font-size: 1.2rem;">0.00</strong> trees.
+                    <p class="impact-subtext">
+                        Equivalent to planting <strong id="equivalentTrees" class="bold-light-green">0.00</strong> trees.
                     </p>
-                    <a href="impact.html" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                    <a href="impact.html" class="btn btn-primary btn-small-link">
                         <i class="fa-solid fa-circle-info" aria-hidden="true"></i> View SDG & Detailed Impact
                     </a>
                 </div>

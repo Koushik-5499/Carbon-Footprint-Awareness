@@ -24,14 +24,14 @@
         <div class="container mt-3">
         <div class="grid-2 align-items-center">
             <div class="hero-text">
-                <h1 style="font-size: 3rem; line-height: 1.2;">Track your impact, <br><span style="color: var(--primary-green);">heal the planet.</span></h1>
-                <p class="mb-2" style="font-size: 1.2rem; color: var(--text-secondary);">EcoTrack helps you calculate, monitor, and reduce your carbon footprint through AI-powered insights and engaging challenges.</p>
+                <h1 class="hero-title">Track your impact, <br><span class="text-primary-green">heal the planet.</span></h1>
+                <p class="mb-2 hero-subtitle">EcoTrack helps you calculate, monitor, and reduce your carbon footprint through AI-powered insights and engaging challenges.</p>
                 
-                <div class="mb-2" style="display: flex; align-items: center; gap: 1rem; background: rgba(255, 255, 255, 0.4); padding: 0.75rem 1.25rem; border-radius: 16px; border: 1px solid var(--glass-border); width: fit-content;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Sustainable_Development_Goal_13Climate.svg" alt="UN SDG 13: Climate Action Badge" style="height: 50px; border-radius: 6px;">
+                <div class="mb-2 badge-wrapper">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Sustainable_Development_Goal_13Climate.svg" alt="UN SDG 13: Climate Action Badge" class="sdg-badge-icon">
                     <div>
-                        <p style="font-weight: 600; color: var(--primary-green); margin: 0; font-size: 0.95rem;">Join 10,000+ eco warriors</p>
-                        <p style="color: var(--text-secondary); margin: 0; font-size: 0.85rem;">Who have saved over <strong>1,200,000 kg CO₂</strong></p>
+                        <p class="badge-headline">Join 10,000+ eco warriors</p>
+                        <p class="badge-subline">Who have saved over <strong>1,200,000 kg CO₂</strong></p>
                     </div>
                 </div>
                 
@@ -49,12 +49,12 @@
                             <label for="loginPassword">Password</label>
                             <input type="password" id="loginPassword" class="form-control" autocomplete="current-password" required>
                         </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+                        <button type="submit" class="btn btn-primary w-100">Sign In</button>
                         <p class="text-center mt-1">
                             New here? <a href="#" id="showRegister">Create an account</a>
                         </p>
                     </form>
-
+ 
                     <!-- Register Form (Hidden by default) -->
                     <form id="registerForm" class="hidden" aria-label="Registration form">
                         <h2 class="text-center">Join EcoTrack</h2>
@@ -70,7 +70,7 @@
                             <label for="regPassword">Password</label>
                             <input type="password" id="regPassword" class="form-control" autocomplete="new-password" required>
                         </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Sign Up</button>
+                        <button type="submit" class="btn btn-primary w-100">Sign Up</button>
                         <p class="text-center mt-1">
                             Already have an account? <a href="#" id="showLogin">Sign In</a>
                         </p>
@@ -79,7 +79,7 @@
             </div>
             
             <div class="hero-image text-center">
-                <img src="assets/images/hero_eco_illustration.png" alt="Eco Friendly Illustration" style="max-width: 100%; border-radius: 20px; animation: float 3s ease-in-out infinite;">
+                <img src="assets/images/hero_eco_illustration.png" alt="Eco Friendly Illustration" class="hero-ill">
             </div>
         </div>
     </div>
