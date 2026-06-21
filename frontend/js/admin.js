@@ -18,8 +18,8 @@ async function loadStats() {
             const tr = document.createElement('tr');
             tr.className = 'table-row-border';
             tr.innerHTML = `
-                <td class="td-left-bold">${user.name}</td>
-                <td class="td-sec">${user.email}</td>
+                <td class="td-left-bold">${window.escapeHTML(user.name)}</td>
+                <td class="td-sec">${window.escapeHTML(user.email)}</td>
                 <td class="td-right">${user.entriesCount}</td>
                 <td class="td-right-bold">${user.score}</td>
             `;

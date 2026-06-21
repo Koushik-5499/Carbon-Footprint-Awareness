@@ -27,9 +27,9 @@ function renderChallenges(challenges, completedIds) {
 
         card.innerHTML = `
             ${isCompleted ? '<div class="check-badge"><i class="fa-solid fa-check"></i></div>' : ''}
-            <span class="challenge-tag">${challenge.type.toUpperCase()}</span>
-            <h3 class="mt-1">${challenge.title}</h3>
-            <p class="challenge-desc">${challenge.description}</p>
+            <span class="challenge-tag">${window.escapeHTML(challenge.type.toUpperCase())}</span>
+            <h3 class="mt-1">${window.escapeHTML(challenge.title)}</h3>
+            <p class="challenge-desc">${window.escapeHTML(challenge.description)}</p>
             <div class="flex-between-center">
                 <span class="points-badge"><i class="fa-solid fa-star"></i> ${challenge.points} pts</span>
                 <button class="btn btn-${isCompleted ? 'secondary' : 'primary'}" 

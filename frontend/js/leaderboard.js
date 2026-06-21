@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             
             tr.innerHTML = `
                 <td class="td-rank">${icon}${rankDisplay}</td>
-                <td class="td-user">${user.name}</td>
+                <td class="td-user">${window.escapeHTML(user.name)}</td>
                 <td class="td-score">${user.score}</td>
             `;
             
